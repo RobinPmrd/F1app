@@ -18,87 +18,28 @@
  * @property {number} highestGridPosition
  */
 
+import { API_URL, compare, getRadioInputValue, initializeSelectElement, nationalityToFlag, sort } from "../utils.js";
+
 /**
  * @type {Driver[]}
  */
-const drivers = await fetch("http://localhost:8080/drivers").then(resp => resp.json());
-
-const nationalityToFlag = {
-    Spanish : "es",
-    British : "gb",
-    French : "fr",
-    Italian : "it",
-    German : "de",
-    Dutch : "nl",
-    Finnish : "fi",
-    Brazilian : "br",
-    Austrian : "at",
-    Argentine : "ar",
-    Australian : "au",
-    "South African" : "za",
-    "New Zealander" : "nz",
-    Venezuelan : "ve",
-    American : "us",
-    Swiss : "ch",
-    Swedish : "se",
-    Thai : "th",
-    Japanese : "jp",
-    Polish : "pl",
-    Belgian : "be",
-    Mexican : "mx",
-    Canadian : "ca",
-    Monegasque : "mc",
-    Colombian : "co",
-    Chilean : "cl",
-    Hungarian : "hu",
-    Irish : "ie",
-    Danish : "dk",
-    Czech : "cz",
-    Malaysian : "my",
-    Portuguese : "pt",
-    Liechtensteiner : "li",
-    Rhodesian : "zw",
-    Uruguayan : "uy",
-    Indian : "in",
-    "East German" : "de",
-    Indonesian : "id",
-    Russian : "ru",
-    Chinese : "cn"
-}
+const drivers = await fetch(API_URL + "/drivers").then(resp => resp.json());
 
 const form_search = document.querySelector(".search");
 const selectElement = form_search.querySelector("[name=search-nationality]")
 initializeSelectElement(selectElement, Object.keys(nationalityToFlag));
 form_search.addEventListener("submit", async event => {
     event.preventDefault();
-    const expected_drivers = filterAndSort(drivers);
+    const expected_drivers = filterAndSortDriver(drivers);
     addDriverReviews(expected_drivers);
 });
-
-/**
- * Insert data elements as option element in selectElement
- * @param {Element} selectElement 
- * @param {*} data 
- */
-function initializeSelectElement(selectElement, data) {
-    const optionElement = document.createElement("option");
-    optionElement.value = "All";
-    optionElement.innerText = "All";
-    selectElement.appendChild(optionElement);
-    for (const nationality of data) {
-        const optionElement = document.createElement("option");
-        optionElement.value = nationality;
-        optionElement.innerText = nationality;
-        selectElement.appendChild(optionElement);
-    }
-}
 
 /**
  * Filter and sort the drivers array in function of form values
  * @param {Driver[]} drivers 
  * @returns {Driver[]}
  */
-function filterAndSort(drivers) {
+function filterAndSortDriver(drivers) {
     const name = form_search.querySelector("[name=search-name]").value;
     const nb_titles = form_search.querySelector("[name=search-titles]").value;
     const nb_titles_op = form_search.querySelector("[name=search-titles-op]").value
@@ -198,57 +139,4 @@ async function getDriverImage(driverRef) {
   const blob = await fetch(`http://localhost:8080/drivers/${driverRef}`).then(resp => resp.blob());
   const imageUrl = URL.createObjectURL(blob);
   return imageUrl;
-}
-
-/** 
- * Do a comparison between a and b, in function of op
- * @param {*} a 
- * @param {*} b 
- * @param {string} op 
- * @returns {boolean}
- */
-function compare(a, b, op) {
-  if (op === ">=") return a >= b;
-  else if (op === "=") return a == b;
-  return a <= b;
-}
-
-/**
- * Sort a and b in function of their type and the order
- * @param {*} a 
- * @param {*} b 
- * @param {string} type 
- * @param {string} order 
- * @returns {number}
- */
-function sort(a, b, type, order) {
-    if (order === "asc") {
-        if (type === "surname") {
-            return a > b ? 1 : a < b ? -1 : 0;
-        }
-        else if (type === "dob") {
-            return a > b ? -1 : a < b ? 1 : 0;
-        }
-        return a - b;
-    }
-    if (type === "surname") {
-        return a > b ? -1 : a < b ? 1 : 0;
-    }
-    else if (type === "dob") {
-        return a > b ? 1 : a < b ? -1 : 0;
-    }
-    return b - a;
-}
-
-/**
- * Get the value of the selected radio button
- * @param {NodeListOf<Element>} radioInputs 
- * @returns 
- */
-function getRadioInputValue(radioInputs) {
-    for (const option of radioInputs) {
-        if (option.checked) {
-            return option.value;
-        }
-    }
 }
