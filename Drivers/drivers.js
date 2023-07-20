@@ -1,5 +1,27 @@
-const drivers = await fetch("http://localhost:8080/drivers").then(resp => resp.json());
+/**
+ * @typedef {Object} Driver
+ * @property {number} id
+ * @property {number} titles
+ * @property {number} number
+ * @property {string} driverRef
+ * @property {string} forename
+ * @property {string} surname
+ * @property {string} code
+ * @property {string} nationality
+ * @property {string} dob
+ * @property {string} url
+ * @property {number} wins
+ * @property {number} grandprix
+ * @property {number} podiums
+ * @property {number} poles
+ * @property {number} highestRacePosition
+ * @property {number} highestGridPosition
+ */
 
+/**
+ * @type {Driver[]}
+ */
+const drivers = await fetch("http://localhost:8080/drivers").then(resp => resp.json());
 
 const nationalityToFlag = {
     Spanish : "es",
@@ -46,18 +68,37 @@ const nationalityToFlag = {
 
 const form_search = document.querySelector(".search");
 const selectElement = form_search.querySelector("[name=search-nationality]")
-const optionElement = document.createElement("option");
-optionElement.value = "All";
-optionElement.innerText = "All";
-selectElement.appendChild(optionElement);
-for (const nationality of Object.keys(nationalityToFlag)) {
-    const optionElement = document.createElement("option");
-    optionElement.value = nationality;
-    optionElement.innerText = nationality;
-    selectElement.appendChild(optionElement);
-}
+initializeSelectElement(selectElement, Object.keys(nationalityToFlag));
 form_search.addEventListener("submit", async event => {
     event.preventDefault();
+    const expected_drivers = filterAndSort(drivers);
+    addDriverReviews(expected_drivers);
+});
+
+/**
+ * Insert data elements as option element in selectElement
+ * @param {Element} selectElement 
+ * @param {*} data 
+ */
+function initializeSelectElement(selectElement, data) {
+    const optionElement = document.createElement("option");
+    optionElement.value = "All";
+    optionElement.innerText = "All";
+    selectElement.appendChild(optionElement);
+    for (const nationality of data) {
+        const optionElement = document.createElement("option");
+        optionElement.value = nationality;
+        optionElement.innerText = nationality;
+        selectElement.appendChild(optionElement);
+    }
+}
+
+/**
+ * Filter and sort the drivers array in function of form values
+ * @param {Driver[]} drivers 
+ * @returns {Driver[]}
+ */
+function filterAndSort(drivers) {
     const name = form_search.querySelector("[name=search-name]").value;
     const nb_titles = form_search.querySelector("[name=search-titles]").value;
     const nb_titles_op = form_search.querySelector("[name=search-titles-op]").value
@@ -70,12 +111,12 @@ form_search.addEventListener("submit", async event => {
     const sort_order= getRadioInputValue(form_search.querySelectorAll("[name=order]"));
     let expected_drivers= name == "" ? drivers.filter(d => compare(d.titles,nb_titles,nb_titles_op) && compare(d.wins,nb_wins,nb_wins_op) && compare(d.grandprix,nb_races, nb_races_op) && (nationality === "All" || d.nationality === nationality)) : drivers.filter(d => d.surname === name && compare(d.titles,nb_titles,nb_titles_op) && compare(d.wins,nb_wins,nb_wins_op) && compare(d.grandprix,nb_races, nb_races_op)&& (nationality === "All" || d.nationality === nationality));
     expected_drivers = expected_drivers.sort((d1,d2) => sort(d1[sort_value], d2[sort_value], sort_value, sort_order));
-    addDriverReviews(expected_drivers);
-});
+    return expected_drivers;
+}
 
 /**
  * Build and add a driver review to the DOM, within the driverReviewsContainer
- * @param {any} driver 
+ * @param {Driver} driver 
  * @param {HTMLElement} driverReviewsContainer 
  */
 async function addDriverReview(driver, driverReviewsContainer) {
@@ -119,7 +160,7 @@ async function addDriverReview(driver, driverReviewsContainer) {
 
 /**
  * Add driver reviews to the DOM, within the content div
- * @param {any[]} drivers 
+ * @param {Driver[]} drivers 
  */
 async function addDriverReviews(drivers) {
     // Remove old driver reviews from the DOM
