@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+}
+
+header {
+  display: flex;
+  background-color: #d61e1e;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 3px;
+  height: 82px;
+}
+
+header img {
+  height: 100px;
+  width: 100px;
+}
+
+header h1 {
+  margin: auto;
+}
+
+main {
+  display: flex;
+  flex-grow: 1;
+}
+
+.side-menu {
+  background-color: #333;
+  width: 125px;
+  border-radius: 3px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.menu-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.menu-list li {
+  margin-bottom: 10px;
+}
+
+.menu-list li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #f6efef;
+  text-align: center;
+}
+
+.menu-list li a:hover {
+  background-color: #a09f9f;
+}
+
+.driver-reviews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#driver-wallpaper {
+  width: 100%;
+  height: 621px;
+  border-radius: 20px;
+  margin: 2px;
+}
+
+.driver-review{
+  /* flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0px;
+  background-color: #f5f5f5;
+  width: 13%;
+  padding: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 5px solid rgb(150, 54, 191);
+  margin: 2px;
+  }
+  
+.driver-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.driver-name {
+margin-top: 10px;
+font-size: 20px;
+font-weight: bold;
+text-align: center;
+}
+
+.driver-nationality::before {
+content: "Nationality: ";
+font-weight: bold;
+}
+
+.driver-nationality {
+  margin: 5px;
+  text-align: center;
+}
+
+.driver-age::before {
+content: "Age: ";
+font-weight: bold;
+}
+
+.driver-age {
+  margin: 5px;
+}
+
+.driver-titles::before {
+content: "Titles: ";
+font-weight: bold;
+}
+
+.driver-titles {
+  margin: 5px;
+}
+
+.driver-races::before {
+  content: "Races: ";
+  font-weight: bold;
+}
+
+.driver-races {
+  margin: 5px;
+}
+
+.search {
+  display: flex;
+  background-color: rgb(227, 226, 226);
+  justify-content: center;
+  padding: 1px;
+}
+
+.input-number {
+  width: 2.5%;
+  text-align: center;
+  margin-right: 15px;
+}
+
+.search-op {
+  background-color: rgb(227, 226, 226);
+  border: none;
+  font-weight: bold;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.search-button {
+  margin-right: 100px;
+}
+
+select {
+  text-align: center;
+}
+
+.sort-select {
+  margin-right: 10px;
+}
+
+.fi {
+  border-radius: 5px;
+}

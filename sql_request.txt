@@ -1,0 +1,38 @@
+Nombre de titre pour un pilote :
+WITH last_race AS (
+  SELECT MAX(raceId) AS last_race_id
+  FROM races
+  GROUP BY year
+)
+SELECT count(driverid)
+FROM driverstandings ds
+JOIN last_race lr ON ds.raceId = lr.last_race_id
+where (ds.driverId = 4 or ds.driverId = 1) and position = 1
+group by driverid
+
+Ajouter le nombre de titre dans drivers :
+WITH last_races_id as (select max(raceId) as raceId from races
+group by year),
+	subquery as (select ds.driverId, count(ds.raceId) as titles from driverstandings ds
+join last_races_id lr on lr.raceId = ds.raceId
+where ds.position = 1
+group by ds.driverId)
+
+UPDATE drivers d
+SET titles = subquery.titles
+FROM subquery
+where d.driverId = subquery.driverId
+
+Ajouter podiums :
+ALTER TABLE drivers
+ADD COLUMN podiums INTEGER DEFAULT 0 NOT NULL;
+
+WITH subquery as (select r.driverId, count(*) as nb_races from results r
+join races ra on ra.raceId = r.raceId
+where r.position <= 3
+group by r.driverId)
+
+UPDATE drivers d
+SET podiums = subquery.nb_races
+FROM subquery
+WHERE d.driverid = subquery.driverid
