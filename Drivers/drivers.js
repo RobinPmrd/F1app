@@ -27,7 +27,7 @@ const drivers = await fetch(API_URL + "/drivers").then(resp => resp.json());
 
 const form_search = document.querySelector(".search");
 const selectElement = form_search.querySelector("[name=search-nationality]")
-initializeSelectElement(selectElement, Object.keys(nationalityToFlag));
+initializeSelectElement(selectElement, Object.keys(nationalityToFlag), true);
 form_search.addEventListener("submit", async event => {
     event.preventDefault();
     const expected_drivers = filterAndSortDriver(drivers);

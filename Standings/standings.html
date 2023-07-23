@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
+    <link rel="stylesheet" href="standings.css">
+    <script type="module" src="standings.js"></script>
+</head>
+<body>
+  <header>
+    <img src="/images/f1_logo.png" alt="logo">
+    <h1 id="top-title">Standings</h1>
+  </header>
+  <main>
+    <nav class="side-menu">
+      <ul class="menu-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/Drivers/drivers.html">Drivers</a></li>
+        <li><a href="#">Teams</a></li>
+        <li><a href="/Circuits\circuits.html">Circuits</a></li>
+        <li><a href="">Standings</a></li>
+        <li><a href="#">News</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <div class="search">
+        <label for="search-season">Season :</label>
+        <select name="search-season" id="search-season"></select>
+        <label for="season-races" id="season-races">After :</label>
+        <select name="season-races" class="races-select"></select>
+      </div>
+      <section class="standings">
+        <table class="driver-table-container">
+          <caption>This is the Table Title</caption>
+          <tr class="table-content driver1">
+            <td>
+              <span class="position">1</span>
+              <span class="driver-name">Lewis</span>
+              <span class="driver-surname">Hamilton</span>
+              <span class="team">Mercedes</span>
+            </td>
+            <td>
+              <span class="points">157 PTS</span
+              ><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver2">
+            <td>
+              <span class="position">2</span>
+              <span class="driver-name">Max</span>
+              <span class="driver-surname">Verstappen</span>
+              <span class="team">Red Bull Racing</span>
+            </td>
+            <td>
+              <span class="points">110 PTS</span
+              ><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver3">
+            <td>
+              <span class="position">3</span>
+              <span class="driver-name">Valtteri</span>
+              <span class="driver-surname">Bottas</span>
+              <span class="team">Mercedes</span>
+            </td>
+            <td>
+              <span class="points">107 PTS</span
+              ><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver4">
+            <td>
+              <span class="position">4</span>
+              <span class="driver-name">Alexander</span>
+              <span class="driver-surname">Albon</span>
+              <span class="team">Red Bull Racing</span>
+            </td>
+            <td>
+              <span class="points">48 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver5">
+            <td>
+              <span class="position">5</span>
+              <span class="driver-name">Charles</span>
+              <span class="driver-surname">Leclerc</span>
+              <span class="team">Ferrari</span>
+            </td>
+            <td>
+              <span class="points">45 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver6">
+            <td>
+              <span class="position">6</span>
+              <span class="driver-name">Lando</span>
+              <span class="driver-surname">Norris</span>
+              <span class="team">McLaren</span>
+            </td>
+            <td>
+              <span class="points">45 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver7">
+            <td>
+              <span class="position">7</span>
+              <span class="driver-name">Lance</span>
+              <span class="driver-surname">Stroll</span>
+              <span class="team">Racing Point</span>
+            </td>
+            <td>
+              <span class="points">42 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver8">
+            <td>
+              <span class="position">8</span>
+              <span class="driver-name">Daniel</span>
+              <span class="driver-surname">Ricciardo</span>
+              <span class="team">Renault</span>
+            </td>
+            <td>
+              <span class="points">33 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver9">
+            <td>
+              <span class="position">9</span>
+              <span class="driver-name">Sergio</span>
+              <span class="driver-surname">Perez</span>
+              <span class="team">Racing Point</span>
+            </td>
+            <td>
+              <span class="points">33 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver10">
+            <td>
+              <span class="position">10</span>
+              <span class="driver-name">Esteban</span>
+              <span class="driver-surname">Ocon</span>
+              <span class="team">Renault</span>
+            </td>
+            <td>
+              <span class="points">26 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+        </table>
+        <table class="constructor-table-container">
+          <caption>This is the Table Title</caption>
+          <tr class="table-content driver1">
+            <td>
+              <span class="position">1</span>
+              <span class="driver-name">Lewis</span>
+              <span class="driver-surname">Hamilton</span>
+              <span class="team">Mercedes</span>
+            </td>
+            <td>
+              <span class="points">157 PTS</span
+              ><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver2">
+            <td>
+              <span class="position">2</span>
+              <span class="driver-name">Max</span>
+              <span class="driver-surname">Verstappen</span>
+              <span class="team">Red Bull Racing</span>
+            </td>
+            <td>
+              <span class="points">110 PTS</span
+              ><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver3">
+            <td>
+              <span class="position">3</span>
+              <span class="driver-name">Valtteri</span>
+              <span class="driver-surname">Bottas</span>
+              <span class="team">Mercedes</span>
+            </td>
+            <td>
+              <span class="points">107 PTS</span
+              ><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver4">
+            <td>
+              <span class="position">4</span>
+              <span class="driver-name">Alexander</span>
+              <span class="driver-surname">Albon</span>
+              <span class="team">Red Bull Racing</span>
+            </td>
+            <td>
+              <span class="points">48 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver5">
+            <td>
+              <span class="position">5</span>
+              <span class="driver-name">Charles</span>
+              <span class="driver-surname">Leclerc</span>
+              <span class="team">Ferrari</span>
+            </td>
+            <td>
+              <span class="points">45 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver6">
+            <td>
+              <span class="position">6</span>
+              <span class="driver-name">Lando</span>
+              <span class="driver-surname">Norris</span>
+              <span class="team">McLaren</span>
+            </td>
+            <td>
+              <span class="points">45 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver7">
+            <td>
+              <span class="position">7</span>
+              <span class="driver-name">Lance</span>
+              <span class="driver-surname">Stroll</span>
+              <span class="team">Racing Point</span>
+            </td>
+            <td>
+              <span class="points">42 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver8">
+            <td>
+              <span class="position">8</span>
+              <span class="driver-name">Daniel</span>
+              <span class="driver-surname">Ricciardo</span>
+              <span class="team">Renault</span>
+            </td>
+            <td>
+              <span class="points">33 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver9">
+            <td>
+              <span class="position">9</span>
+              <span class="driver-name">Sergio</span>
+              <span class="driver-surname">Perez</span>
+              <span class="team">Racing Point</span>
+            </td>
+            <td>
+              <span class="points">33 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+          <tr class="table-content driver10">
+            <td>
+              <span class="position">10</span>
+              <span class="driver-name">Esteban</span>
+              <span class="driver-surname">Ocon</span>
+              <span class="team">Renault</span>
+            </td>
+            <td>
+              <span class="points">26 PTS</span><i class="fas fa-chevron-right"></i>
+            </td>
+          </tr>
+        </table>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

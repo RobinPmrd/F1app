@@ -99,13 +99,16 @@ export function getRadioInputValue(radioInputs) {
 /**
  * Insert data elements as option element in selectElement
  * @param {Element} selectElement 
- * @param {*} data 
+ * @param {*} data
+ * @param {boolean} addAll 
  */
-export function initializeSelectElement(selectElement, data) {
-    const optionElement = document.createElement("option");
-    optionElement.value = "All";
-    optionElement.innerText = "All";
-    selectElement.appendChild(optionElement);
+export function initializeSelectElement(selectElement, data, addAll) {
+    if (addAll) {
+        const optionElement = document.createElement("option");
+        optionElement.value = "All";
+        optionElement.innerText = "All";
+        selectElement.appendChild(optionElement);
+    }
     for (const element of data) {
         const optionElement = document.createElement("option");
         optionElement.value = element;
