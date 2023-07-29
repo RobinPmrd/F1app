@@ -1,23 +1,3 @@
-/**
- * @typedef {Object} Driver
- * @property {number} id
- * @property {number} titles
- * @property {number} number
- * @property {string} driverRef
- * @property {string} forename
- * @property {string} surname
- * @property {string} code
- * @property {string} nationality
- * @property {string} dob
- * @property {string} url
- * @property {number} wins
- * @property {number} grandprix
- * @property {number} podiums
- * @property {number} poles
- * @property {number} highestRacePosition
- * @property {number} highestGridPosition
- */
-
 import { API_URL, compare, getRadioInputValue, initializeSelectElement, nationalityToFlag, sort } from "../utils.js";
 
 /**
