@@ -36,3 +36,13 @@ UPDATE drivers d
 SET podiums = subquery.nb_races
 FROM subquery
 WHERE d.driverid = subquery.driverid
+
+Ajouter résultat : 
+select d.surname, re.* from results re
+join races r on r.raceid = re.raceid
+join drivers d on d.driverid = re.driverid
+where r.year = 2023 and r.raceid = 1109
+order by re.position;
+INSERT INTO results (raceid, driverid, constructorid, number, grid, position, positiontext, positionorder, points, laps, time, milliseconds, fastestlap, rank, fastestlaptime, fastestlapspeed, statusid) VALUES 
+(1109, 840, 117, 18, 14, 10, '10', 10, 1, 69, NULL, NULL, 54, 11, '1:23.425', '189.051', 11)
+SELECT setval('results_resultid_seq', 26047);

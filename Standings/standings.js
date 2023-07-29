@@ -1,22 +1,27 @@
 import { API_URL, initializeSelectElement, nationalityToFlag } from "../utils.js";
 
-
-let season = [];
+let seasons = [];
 for (let year = 2023; year >= 1950; year--) {
-    season.push(year);
+    seasons.push(year);
 }
-const seasonSelectElement = document.querySelector("[name = search-season]");
-initializeSelectElement(seasonSelectElement, season, false);
 
-const driverStanding = await fetch(API_URL + `/standings/drivers/2023`).then(resp => resp.json());
+let raceName = sessionStorage.getItem("raceName") != null ? sessionStorage.getItem("raceName") : "All";
+let season = sessionStorage.getItem("season") != null ? sessionStorage.getItem("season") : 2023;
+
+const seasonSelectElement = document.querySelector("[name = search-season]");
+initializeSelectElement(seasonSelectElement, seasons, false);
+seasonSelectElement.value = season;
+
+const driverStanding = raceName === "All" ? await fetch(API_URL + `/standings/drivers/${season}`).then(resp => resp.json()) : await fetch(API_URL + `/standings/drivers/${season}/${raceName}`).then(resp => resp.json());
 addDriverTable(driverStanding);
-const constructorStanding = await fetch(API_URL + `/standings/constructors/2023`).then(resp => resp.json());
+const constructorStanding = raceName === "All" ? await fetch(API_URL + `/standings/constructors/${season}`).then(resp => resp.json()) : await fetch(API_URL + `/standings/constructors/${season}/${raceName}`).then(resp => resp.json());
 addConstructorTable(constructorStanding);
 
 const racesSelectElement = document.querySelector("[name=season-races]");
-const seasonRaces = await fetch(API_URL + `/races/2023`).then(resp => resp.json());
+const seasonRaces = await fetch(API_URL + `/races/${season}`).then(resp => resp.json());
 const raceNames = seasonRaces.map(race => race.name);
 initializeSelectElement(racesSelectElement, raceNames, true);
+racesSelectElement.value = raceName;
 
 seasonSelectElement.addEventListener("change", async event => {
     event.preventDefault();
@@ -40,39 +45,46 @@ racesSelectElement.addEventListener("change", async () => {
     addConstructorTable(constructorStanding);
 })
 
+const viewRaceButton = document.querySelector(".button-container button");
+viewRaceButton.addEventListener("click", () => {
+    sessionStorage.setItem('raceName', racesSelectElement.value);
+    sessionStorage.setItem('season', seasonSelectElement.value);
+    window.location.href = '/Race/race.html';
+})
+
 
 /**
  * Build a driver standing row and add it to tableElement
  * @param {HTMLTableElement} tableElement 
- * @param {any[]} row 
+ * @param {DriverStandingRow} row 
  */
 function createDriverTableRow(tableElement, row) {
     const trElement = document.createElement("tr");
-    trElement.className = `table-content ${row[4].replace(/ /g,'')}`;
+    trElement.className = `table-content ${row.team.replace(/ /g,'')}`;
     const tdElement1 = document.createElement("td");
     const tdElement2 = document.createElement("td");
     const positionSpanElement = document.createElement("span");
     positionSpanElement.className = "position";
-    positionSpanElement.innerText = row[0];
+    positionSpanElement.innerText = row.position;
     tdElement1.appendChild(positionSpanElement);
     const forenameSpanElement = document.createElement("span");
     forenameSpanElement.className = "driver-name";
-    forenameSpanElement.innerText = `${row[2]} `;
+    forenameSpanElement.innerText = `${row.forename} `;
     tdElement1.appendChild(forenameSpanElement);
     const surnameSpanElement = document.createElement("span");
     surnameSpanElement.className = "driver-surname";
-    surnameSpanElement.innerText = `${row[3]} `;
+    surnameSpanElement.innerText = `${row.surname} `;
     tdElement1.appendChild(surnameSpanElement);
     const nationalitySpanElement = document.createElement("span");
-    nationalitySpanElement.className = `fi fi-${nationalityToFlag[row[5]]}`;
+    nationalitySpanElement.className = `fi fi-${nationalityToFlag[row.nationality]}`;
     tdElement1.appendChild(nationalitySpanElement);
     const teamSpanElement = document.createElement("span");
     teamSpanElement.className = "team";
-    teamSpanElement.innerText = row[4];
+    teamSpanElement.innerText = row.team;
     tdElement1.appendChild(teamSpanElement);
     const pointsSpanElement = document.createElement("span");
     pointsSpanElement.className = "points";
-    pointsSpanElement.innerText = `${row[1]} PTS`;
+    pointsSpanElement.innerText = `${row.points} PTS`;
     tdElement2.appendChild(pointsSpanElement);
     const iElement = document.createElement("i");
     iElement.className = "fas fa-chevron-right";
@@ -102,31 +114,31 @@ function addDriverTable(driverStanding) {
 /**
  * Build a constructor standing row and add it to tableElement
  * @param {HTMLTableElement} tableElement 
- * @param {any[]} row 
+ * @param {ConstructorStandingRow} row 
  */
 function createConstructorTableRow(tableElement, row) {
     const trElement = document.createElement("tr");
-    trElement.className = `table-content ${row[2].replace(/ /g,'')}`;
+    trElement.className = `table-content ${row.name.replace(/ /g,'')}`;
     const tdElement1 = document.createElement("td");
     const tdElement2 = document.createElement("td");
 
     const positionSpanElement = document.createElement("span");
     positionSpanElement.className = "position";
-    positionSpanElement.innerText = row[0];
+    positionSpanElement.innerText = row.position;
     tdElement1.appendChild(positionSpanElement);
 
     const nameSpanElement = document.createElement("span");
     nameSpanElement.className = "constructor-name";
-    nameSpanElement.innerText = `${row[2]} `;
+    nameSpanElement.innerText = `${row.name} `;
     tdElement1.appendChild(nameSpanElement);
 
     const nationalitySpanElement = document.createElement("span");
-    nationalitySpanElement.className = `fi fi-${nationalityToFlag[row[3]]}`;
+    nationalitySpanElement.className = `fi fi-${nationalityToFlag[row.nationality]}`;
     tdElement1.appendChild(nationalitySpanElement);
 
     const pointsSpanElement = document.createElement("span");
     pointsSpanElement.className = "points";
-    pointsSpanElement.innerText = `${row[1]} PTS`;
+    pointsSpanElement.innerText = `${row.points} PTS`;
     tdElement2.appendChild(pointsSpanElement);
 
     const iElement = document.createElement("i");

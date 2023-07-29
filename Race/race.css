@@ -67,52 +67,47 @@ main {
   background-color: #a09f9f;
 }
 
-.search {
-  display: flex;
-  background-color: rgb(227, 226, 226);
-  justify-content: center;
-  padding: 1px;
-}
-
-.search-button {
-  margin-right: 100px;
-}
-
-select {
-  text-align: center;
-}
-
-.sort-select {
-  margin-right: 10px;
-}
-
 .fi {
   width: 20px;
   border-radius: 5px;
 }
 
-.button-container {
+.race-details{
   display: flex;
-  justify-content: center;
-  margin-top: 5px;
-  margin-bottom: 0px;
-}
-
-.content button {
-  border-color: transparent;
+  border: 6px solid #d61e1e;
   border-radius: 10px;
-  background-color: #d61e1e;
-  color: white;
-  font-weight: bold;
-  padding: 8px;
+  justify-content: space-around;
+  margin: 10px 10px 0 10px;
 }
 
-button:hover {
-background-color: var(--hover-color);
+.race-details p {
+  font-size: 1.3em;
+}
+
+.circuit::before {
+  content: "Circuit: ";
+  font-weight: bold;
+}
+
+.location::before {
+  content: "Location: ";
+  font-weight: bold;
+}
+
+.date::before {
+  content: "Date: ";
+  font-weight: bold;
+}
+
+.round::before {
+  content: "Round: ";
+  font-weight: bold;
 }
 
 .standings {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 :root {
@@ -138,11 +133,12 @@ background-color: var(--hover-color);
 }
 
 .driver-table-container {
-  width: 60%;
-  min-width: 600px;
-  /* border: 1px solid black; */
+  /* width: 60%;
+  min-width: 600px; */
   margin: 20px;
-  margin-top: 0px;
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0px;
 }
 
 caption {
@@ -154,47 +150,77 @@ caption {
   /* Add more styles as needed */
 }
 
-.driver-table-container th {
-  display: none;
+/* Horizontally align content to the right in the second column */
+.driver-table-container tr td:nth-child(1) {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-left: 1px solid #ccc;
+  border-radius: 10px 0 0 10px;
 }
 
+/* Select all td elements in the last row of the table */
+.driver-table-container tr:last-child td {
+  border-bottom: 1px solid #ccc;
+}
+
+.driver-table-container tr td:nth-child(4) {
+  border-right: 1px solid #ccc;
+  border-radius: 0 10px 10px 0;
+}
+
+.driver-table-container tr th:nth-child(1) {
+  border-left: 1px solid #ccc;
+  border-radius: 10px 0 0 10px;
+}
+
+.driver-table-container tr th:nth-child(4) {
+  border-right: 1px solid #ccc;
+  border-radius: 0 10px 10px 0;
+}
+
+
 .driver-table-container tr {
-  display: flex;
   padding: 0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
   transition: 0.3s;
   cursor: pointer;
+}
+
+
+.driver-table-container tr.table-content th {
+  /* display: none; */
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 8px;
+  border-top: 1px solid #ccc;
   background-color: #f9f8f8;
 }
 
-.driver-table-container tr.table-content {
-  justify-content: space-between;
-  padding: 0;
+.driver-table-container tr.table-content td {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 8px;
+  border-top: 1px solid #ccc;
+  background-color: #f9f8f8;
 }
 
-.driver-table-container tr.table-content td {
-  margin: 0 20px 0 10px;
-  font-size: 1.4rem;
-  text-align: center;
-  padding: 10px;
-  padding-right: 0px;
-}
+
 
 .driver-table-container tr.table-content td .position {
   border-right: 5px solid var(--mercedes-color);
   padding-right: 10px;
-  font-size: 1.4rem;
   font-weight: bold;
 }
 
 .driver-table-container tr.table-content td .driver-name {
   margin-left: 10px;
+  margin-right: 5px;
 }
 
 .driver-table-container tr.table-content td .driver-surname {
   font-weight: bolder;
   text-transform: uppercase;
+  margin-right: 5px;
 }
 
 .driver-table-container tr.table-content td .team {
@@ -210,6 +236,7 @@ caption {
   padding: 0 10px;
 }
 
+
 .driver-table-container tr.table-content td i {
   margin-left: 20px;
   color: #e10600;
@@ -218,7 +245,7 @@ caption {
 
 /* HOVER */
 
-.driver-table-container tr:hover {
+.driver-table-container tr:hover td{
   background-color: var(--hover-color);
   color: #ffffff;
 }
@@ -234,7 +261,7 @@ caption {
   min-width: 600px;
   /* border: 1px solid black; */
   margin: 20px;
-  margin-top: 0px;
+  margin-top: 20px;
 }
 
 .constructor-table-container th {

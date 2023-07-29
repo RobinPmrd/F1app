@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 App</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
-    <link rel="stylesheet" href="standings.css">
-    <script type="module" src="standings.js"></script>
+    <link rel="stylesheet" href="race.css">
+    <script type="module" src="race.js"></script>
 </head>
 <body>
   <header>
     <img src="/images/f1_logo.png" alt="logo">
-    <h1 id="top-title">Standings</h1>
+    <h1 id="top-title">Race</h1>
   </header>
   <main>
     <nav class="side-menu">
@@ -20,22 +20,19 @@
         <li><a href="/Drivers/drivers.html">Drivers</a></li>
         <li><a href="#">Teams</a></li>
         <li><a href="/Circuits\circuits.html">Circuits</a></li>
-        <li><a href="">Standings</a></li>
+        <li><a href="/Standings/standings.html">Standings</a></li>
         <li><a href="#">News</a></li>
       </ul>
     </nav>
     <div class="content">
-      <div class="search">
-        <label for="search-season">Season :</label>
-        <select name="search-season" id="search-season"></select>
-        <label for="season-races" id="season-races">After :</label>
-        <select name="season-races" class="races-select"></select>
-      </div>
-      <div class="button-container">
-        <button>View Race</button>
+      <div class="race-details">
+        <p class="circuit"></p>
+        <p class="location"></p>
+        <p class="date"></p>
+        <p class="round"></p>
       </div>
       <section class="standings">
-        <table class="driver-table-container">
+        <table class="driver-table-container" id="race">
           <caption>This is the Table Title</caption>
           <tr class="table-content driver1">
             <td>
@@ -151,8 +148,12 @@
             </td>
           </tr>
         </table>
-        <table class="constructor-table-container">
+        <table class="driver-table-container" id="qualifying">
           <caption>This is the Table Title</caption>
+          <tr class="table-content">
+            <th>Driver</th>
+            <th>Points</th>
+          </tr>
           <tr class="table-content driver1">
             <td>
               <span class="position">1</span>
