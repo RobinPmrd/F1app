@@ -7,15 +7,11 @@ for (let year = 2023; year >= 1950; year--) {
 
 let raceName = sessionStorage.getItem("raceName") != null ? sessionStorage.getItem("raceName") : "All";
 let season = sessionStorage.getItem("season") != null ? sessionStorage.getItem("season") : 2023;
+sessionStorage.clear();
 
 const seasonSelectElement = document.querySelector("[name = search-season]");
 initializeSelectElement(seasonSelectElement, seasons, false);
 seasonSelectElement.value = season;
-
-const driverStanding = raceName === "All" ? await fetch(API_URL + `/standings/drivers/${season}`).then(resp => resp.json()) : await fetch(API_URL + `/standings/drivers/${season}/${raceName}`).then(resp => resp.json());
-addDriverTable(driverStanding);
-const constructorStanding = raceName === "All" ? await fetch(API_URL + `/standings/constructors/${season}`).then(resp => resp.json()) : await fetch(API_URL + `/standings/constructors/${season}/${raceName}`).then(resp => resp.json());
-addConstructorTable(constructorStanding);
 
 const racesSelectElement = document.querySelector("[name=season-races]");
 const seasonRaces = await fetch(API_URL + `/races/${season}`).then(resp => resp.json());
@@ -34,16 +30,27 @@ seasonSelectElement.addEventListener("change", async event => {
     const seasonRaces = await fetch(API_URL + `/races/${season}`).then(resp => resp.json());
     const raceNames = seasonRaces.map(race => race.name);
     initializeSelectElement(racesSelectElement, raceNames, true);
+    viewRaceButton.style.display = "none";
 });
 
 racesSelectElement.addEventListener("change", async () => {
     const race = racesSelectElement.value;
     const season = seasonSelectElement.value;
-    const driverStanding = await fetch(API_URL + `/standings/drivers/${season}/${race}`).then(resp => resp.json());
+    if (race === "All") {
+        var driverStanding = await fetch(API_URL + `/standings/drivers/${season}`).then(resp => resp.json());
+        var constructorStanding = await fetch(API_URL + `/standings/constructors/${season}`).then(resp => resp.json());
+        viewRaceButton.style.display = "none";
+    }
+    else  {
+        var driverStanding = await fetch(API_URL + `/standings/drivers/${season}/${race}`).then(resp => resp.json());
+        var constructorStanding = await fetch(API_URL + `/standings/constructors/${season}/${race}`).then(resp => resp.json());
+        viewRaceButton.style.display = "block";
+    }
     addDriverTable(driverStanding);
-    const constructorStanding = await fetch(API_URL + `/standings/constructors/${season}/${race}`).then(resp => resp.json());
     addConstructorTable(constructorStanding);
 })
+// Trigger the raceSelectElement even for the first page loading
+racesSelectElement.dispatchEvent(new Event("change"));
 
 const viewRaceButton = document.querySelector(".button-container button");
 viewRaceButton.addEventListener("click", () => {

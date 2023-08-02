@@ -99,6 +99,7 @@ select {
 }
 
 .content button {
+  display: none;
   border-color: transparent;
   border-radius: 10px;
   background-color: #d61e1e;
