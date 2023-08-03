@@ -89,6 +89,7 @@
  * @property {string} name
  * @property {Date} date
  * @property {string} url
+ * @property {string} winner
  */
 
 /**
