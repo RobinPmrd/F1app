@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+#btn-goat {
+  margin-top: 20px;
+}
+
+
+.driver-review {
+  flex-grow: 1;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+.driver-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.driver-name {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.driver-nationality::before {
+  content: "Nationality: ";
+  font-weight: bold;
+}
+
+.driver-dob::before {
+  content: "Date of Birth: ";
+  font-weight: bold;
+}
+
+.driver-titles::before {
+  content: "Number of Titles: ";
+  font-weight: bold;
+}
+  

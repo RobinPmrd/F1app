@@ -6,20 +6,20 @@
     <title>F1 App</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="drivers.css">
+    <link rel="stylesheet" href="constructors.css">
     <script type="module" src="drivers.js"></script>
 </head>
 <body>
   <header>
     <img src="/images/f1_logo.png" alt="logo">
-    <h1 id="top-title">Drivers</h1>
+    <h1 id="top-title">Constructors</h1>
   </header>
   <main>
     <nav class="side-menu">
       <ul class="menu-list">
         <li><a href="/">Home</a></li>
-        <li><a href="">Drivers</a></li>
-        <li><a href="/Constructors/constructors.html">Teams</a></li>
+        <li><a href="/Drivers/drivers.html">Drivers</a></li>
+        <li><a href="">Teams</a></li>
         <li><a href="/Races/races.html">Races</a></li>
         <li><a href="/Standings/standings.html">Standings</a></li>
         <li><a href="#">News</a></li>
@@ -28,7 +28,7 @@
     <div class="content">
       <form class="search">
         <div>
-          <input type="text" name="search-name" class="searchBar" placeholder="Driver.." autocomplete="off">
+          <input type="text" name="search-name" class="searchBar" placeholder="Constructor.." autocomplete="off">
           <ul id="suggestionsList"></ul>
         </div>
         <label for="search-titles">N° titles</label>
@@ -54,14 +54,13 @@
         <input type="number" name="search-races" class="input-number">
         <label for="search-nationality">Nationality :</label>
         <select name="search-nationality"></select>
-        <!-- <label for="search-teams">Team :</label>
-        <input type="text" name="search-teams"> -->
+        <!-- <label for="search-driver">Driver :</label>
+        <input type="text" name="search-driver"> -->
         <button type="submit" name="search-button" class="search-button">🔎</button>
         <label for="sort">Sort by :</label>
         <select name="sort" class="sort-select">
-          <option value="surname">Name</option>
+          <option value="name">Name</option>
           <option value="titles">Titles</option>
-          <option value="dob">Age</option>
           <option value="grandprix">Races</option>
         </select>
         <label for="acs">Acs</label>
@@ -69,8 +68,7 @@
         <label for="dsc">Desc</label>
         <input type="radio" id="dsc" name="order" value="dsc">
       </form>
-      <section class="driver-reviews">
-        <img src="/images/drivers_wallpaper.png" alt="drivers" id="driver-wallpaper">
+      <section class="constructor-reviews">
       </section>
     </div>
   </main>

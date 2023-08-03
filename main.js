@@ -1,8 +1,10 @@
-const drivers = await fetch("http://localhost:8080/drivers").then(resp => resp.json());
+import { API_URL } from "./utils.js";
+
+const drivers = await fetch(API_URL + "/drivers").then(resp => resp.json());
 
 async function getDriver(name) {
     const driver = drivers.find(d => d.driverRef == name);
-    const blob = await fetch("http://localhost:8080/drivers/alonso").then(resp => resp.blob());
+    const blob = await fetch(API_URL + "/drivers/alonso").then(resp => resp.blob());
     const imageUrl = URL.createObjectURL(blob);
     const avatarElement = document.createElement("img");
     avatarElement.className = "driver-avatar";
