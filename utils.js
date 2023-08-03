@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8080"
+export const API_URL = "http://192.168.0.15:8080"
 
 export const nationalityToFlag = {
     Spanish : "es",
@@ -41,6 +41,56 @@ export const nationalityToFlag = {
     Indonesian : "id",
     Russian : "ru",
     Chinese : "cn"
+}
+
+export const countryToFlag = {
+    Spain : "es",
+    UK : "gb",
+    France : "fr",
+    Italy : "it",
+    Germany : "de",
+    Netherlands : "nl",
+    Finland : "fi",
+    Brazil : "br",
+    Austria : "at",
+    Argentina: "ar",
+    Australia : "au",
+    "South Africa" : "za",
+    "New Zealand" : "nz",
+    Venezuela : "ve",
+    USA : "us",
+    "United States" : "us",
+    Switzerland : "ch",
+    Sweden : "se",
+    Thailand : "th",
+    Japan : "jp",
+    Polish : "pl",
+    Belgium : "be",
+    Mexico: "mx",
+    Canada : "ca",
+    Monaco : "mc",
+    Colombia : "co",
+    Chili : "cl",
+    Hungary : "hu",
+    Ireland : "ie",
+    Denmark : "dk",
+    Czech : "cz",
+    Malaysia : "my",
+    Portugal : "pt",
+    Uruguay : "uy",
+    India : "in",
+    Indonesia : "id",
+    Russia : "ru",
+    China : "cn",
+    "Saudi Arabia" : "sa",
+    Turkey : "tr",
+    Bahrain : "bh",
+    Azerbaijan : "az",
+    Singapore : "sg",
+    Qatar : "qa",
+    UAE : "ae",
+    Korea : "kr",
+    Morocco : "ma"
 }
 
 /** 
@@ -116,3 +166,39 @@ export function initializeSelectElement(selectElement, data, addAll) {
         selectElement.appendChild(optionElement);
     }
 }
+
+/**
+ * Put the selected suggestion as the value of 
+ * @param {Event} event
+ * @param {HTMLUListElement} suggestionList
+ * @param {HTMLInputElement} inputElement  
+ */
+function selectSuggestion(event, suggestionList, inputElement) {
+    const target = event.target;
+    if (target.tagName === 'LI') {
+      inputElement.value = target.textContent; // Set the clicked suggestion value in the input field
+      suggestionList.innerHTML = ''; // Clear the suggestion list after selection
+    }
+  }
+
+/**
+ * Add each suggestion to suggestionList
+ * @param {string} inputValue 
+ */
+function showSuggestions(inputValue) {
+    const filteredDrivers = driverNames.filter(driver => driver.toLowerCase().includes(inputValue.toLowerCase()));
+
+    // Clear the suggestion list
+    suggestionList.innerHTML = '';
+
+    // Display suggestions
+    filteredDrivers.forEach(driver => {
+        const li = document.createElement('li');
+        li.textContent = driver;
+        suggestionList.appendChild(li);
+    });
+
+        // Get the width of the input element
+    const inputWidth = driverSearchInput.getBoundingClientRect().width;
+    suggestionList.style.width = inputWidth + 'px'; // Set the width of the suggestion list
+  }

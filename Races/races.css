@@ -67,7 +67,7 @@ main {
   background-color: #a09f9f;
 }
 
-.circuit-reviews {
+.race-reviews {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -80,11 +80,10 @@ main {
   margin: 2px;
 }
 
-.circuit-review{
+.race-review{
   /* flex-grow: 1; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   row-gap: 0px;
   background-color: #f5f5f5;
@@ -97,45 +96,55 @@ main {
   border: 5px solid rgb(150, 54, 191);
   margin: 2px;
   }
+
+.race-review:hover {
+  background-color: #38383f;
+  color: #ffffff;
+}
   
-.circuit-image{
+.race-image{
   width: 150px;
   height: 150px;
   border-radius: 20%;
 }
 
-.circuit-name {
+.race-name {
 margin-top: 10px;
 font-size: 20px;
 font-weight: bold;
 text-align: center;
 }
 
-.circuit-country::before {
-content: "Country: ";
-font-weight: bold;
-}
 
 .circuit-country {
+  margin: 5px;
+}
+
+.circuit-name::before {
+  content: "Circuit: ";
+  font-weight: bold;
+  }
+  
+.circuit-name {
   margin: 5px;
   text-align: center;
 }
 
-.circuit-location::before {
-  content: "Location: ";
-  font-weight: bold;
-  }
-  
-.circuit-location {
-  margin: 5px;
-}
-
-.circuit-hostedRaces::before {
-content: "Hosted races: ";
+.race-year::before {
+content: "Year: ";
 font-weight: bold;
 }
 
-.circuit-hostedRaces {
+.race-year {
+  margin: 5px;
+}
+
+.race-round::before {
+  content: "Round: ";
+  font-weight: bold;
+  }
+  
+.race-round {
   margin: 5px;
 }
 
@@ -173,5 +182,29 @@ select {
 }
 
 .fi {
-  border-radius: 5px;
+  border-radius: 25%;
+  width: 100px;
+  height: 50px;
+}
+
+#suggestionsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 1;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#suggestionsList li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#suggestionsList li:hover {
+  background-color: #f1f1f1;
 }

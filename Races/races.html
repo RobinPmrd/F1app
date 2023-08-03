@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 App</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
-    <link rel="stylesheet" href="circuits.css">
-    <script type="module" src="circuits.js"></script>
+    <link rel="stylesheet" href="races.css">
+    <script type="module" src="races.js"></script>
 </head>
 <body>
   <header>
     <img src="/images/f1_logo.png" alt="logo">
-    <h1 id="top-title">Circuits</h1>
+    <h1 id="top-title">Races</h1>
   </header>
   <main>
     <nav class="side-menu">
@@ -19,37 +19,38 @@
         <li><a href="/">Home</a></li>
         <li><a href="/Drivers\drivers.html">Drivers</a></li>
         <li><a href="#">Teams</a></li>
-        <li><a href=""">Circuits</a></li>
-        <li><a href="#">Standings</a></li>
+        <li><a href=""">Races</a></li>
+        <li><a href="/Standings/standings.html">Standings</a></li>
         <li><a href="#">News</a></li>
       </ul>
     </nav>
     <div class="content">
       <form class="search">
-        <input type="text" name="search-name" class="searchBar" placeholder="Search..">
-        <label for="search-races">N° races</label>
-        <select name="search-races-op" class="search-op">
-          <option value=">=">>=</option>
-          <option value="=">=</option>
-          <option value="<="><=</option>
-        </select>
-        <input type="number" name="search-races" class="input-number">
+        <label for="search-season">Season</label>
+        <input type="number" name="search-season" class="input-number" min="1950" max="2023">
+        <label for="search-circuit">Circuit :</label>
+        <select name="search-circuit"></select>
         <label for="search-county">Country :</label>
         <select name="search-country"></select>
+        <label for="search-winner">Won by :</label>
+        <div>
+          <input type="text" name="search-winner" class="searchBar" placeholder="Driver.." autocomplete="off">
+          <ul id="suggestionsList"></ul>
+        </div>
         <button type="submit" name="search-button" class="search-button">🔎</button>
         <label for="sort">Sort by :</label>
         <select name="sort" class="sort-select">
-          <option value="name">Name</option>
+          <option value="year">Season</option>
+          <option value="round">Round</option>
           <option value="country">Country</option>
-          <option value="hostedRaces">Races</option>
         </select>
         <label for="acs">Acs</label>
         <input type="radio" id="acs" name="order" value="asc" checked="checked">
         <label for="dsc">Desc</label>
         <input type="radio" id="dsc" name="order" value="dsc">
       </form>
-      <section class="circuit-reviews">
-        <img src="/images/circuits_wallpaper.png" alt="circuits" id="circuits-wallpaper">
+      <section class="race-reviews">
+        <img src="/images/races_wallpaper.jpg" alt="circuits" id="circuits-wallpaper">
       </section>
     </div>
   </main>
