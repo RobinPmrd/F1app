@@ -27,7 +27,7 @@ sortSelectElement.addEventListener("change", () => {
 const driverSearchInput = document.querySelector("[name = search-name]");
 const suggestionList = document.getElementById('suggestionsList');
 // Event listener for input changes
-driverSearchInput.addEventListener('input', () => showSuggestions(driverSearchInput.value));
+driverSearchInput.addEventListener('input', () => showSuggestions(driverSearchInput.value, driverNames, suggestionList, driverSearchInput));
 // Event delegation for li elements
 suggestionList.addEventListener('click', event => selectSuggestion(event, suggestionList, driverSearchInput));
 // Event listener to close suggestion list when clicking outside

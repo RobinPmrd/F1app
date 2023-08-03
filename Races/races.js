@@ -1,4 +1,4 @@
-import { countryToFlag, compare, API_URL, getRadioInputValue, sort, initializeSelectElement, selectSuggestions } from "../utils.js";
+import { countryToFlag, API_URL, getRadioInputValue, sort, initializeSelectElement, selectSuggestion, showSuggestions } from "../utils.js";
 
 /**
  * @type {Race[]}
@@ -29,9 +29,9 @@ if (sessionStorage.getItem("toRacePage") == "true") {
 const driverSearchInput = document.querySelector("[name = search-winner]");
 const suggestionList = document.getElementById('suggestionsList');
 // Event listener for input changes
-driverSearchInput.addEventListener('input', () => showSuggestions(driverSearchInput.value));
+driverSearchInput.addEventListener('input', () => showSuggestions(driverSearchInput.value, driverNames, suggestionList, driverSearchInput));
 // Event delegation for li elements
-suggestionList.addEventListener('click', (event) => selectSuggestions(event, suggestionList, driverSearchInput));
+suggestionList.addEventListener('click', (event) => selectSuggestion(event, suggestionList, driverSearchInput));
 // Event listener to close suggestion list when clicking outside
 document.addEventListener('click', () => suggestionList.innerHTML = '');
 

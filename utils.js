@@ -173,7 +173,7 @@ export function initializeSelectElement(selectElement, data, addAll) {
  * @param {HTMLUListElement} suggestionList
  * @param {HTMLInputElement} inputElement  
  */
-function selectSuggestion(event, suggestionList, inputElement) {
+export function selectSuggestion(event, suggestionList, inputElement) {
     const target = event.target;
     if (target.tagName === 'LI') {
       inputElement.value = target.textContent; // Set the clicked suggestion value in the input field
@@ -183,9 +183,12 @@ function selectSuggestion(event, suggestionList, inputElement) {
 
 /**
  * Add each suggestion to suggestionList
- * @param {string} inputValue 
+ * @param {string} inputValue
+ * @param {string[]} driverNames
+ * @param {HTMLUListElement} suggestionList
+ * @param {HTMLInputElement} inputElement 
  */
-function showSuggestions(inputValue) {
+export function showSuggestions(inputValue, driverNames, suggestionList, inputElement) {
     const filteredDrivers = driverNames.filter(driver => driver.toLowerCase().includes(inputValue.toLowerCase()));
 
     // Clear the suggestion list
@@ -199,6 +202,6 @@ function showSuggestions(inputValue) {
     });
 
         // Get the width of the input element
-    const inputWidth = driverSearchInput.getBoundingClientRect().width;
+    const inputWidth = inputElement.getBoundingClientRect().width;
     suggestionList.style.width = inputWidth + 'px'; // Set the width of the suggestion list
   }
