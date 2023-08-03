@@ -1,18 +1,37 @@
-import { API_URL, compare, getRadioInputValue, initializeSelectElement, nationalityToFlag, sort } from "../utils.js";
+import { API_URL, compare, getRadioInputValue, initializeSelectElement, nationalityToFlag, sort, selectSuggestion, showSuggestions } from "../utils.js";
 
 /**
  * @type {Driver[]}
  */
-const drivers = await fetch(API_URL + "/drivers").then(resp => resp.json());
+let drivers = await fetch(API_URL + "/drivers").then(resp => resp.json());
+const driverNames = drivers.map(d => d.surname);
 
 const form_search = document.querySelector(".search");
 const selectElement = form_search.querySelector("[name=search-nationality]")
 initializeSelectElement(selectElement, Object.keys(nationalityToFlag), true);
 form_search.addEventListener("submit", async event => {
     event.preventDefault();
-    const expected_drivers = filterAndSortDriver(drivers);
-    addDriverReviews(expected_drivers);
+    drivers = await fetch(API_URL + "/drivers").then(resp => resp.json());
+    drivers = filterAndSortDriver(drivers);
+    addDriverReviews(drivers);
 });
+
+const sortSelectElement= form_search.querySelector("[name=sort]");
+sortSelectElement.addEventListener("change", () => {
+    const sort_value= sortSelectElement.value;
+    const sort_order= getRadioInputValue(form_search.querySelectorAll("[name=order]"));
+    const expected_drivers = drivers.sort((d1,d2) => sort(d1[sort_value], d2[sort_value], sort_value, sort_order));
+    addDriverReviews(expected_drivers);
+})
+
+const driverSearchInput = document.querySelector("[name = search-name]");
+const suggestionList = document.getElementById('suggestionsList');
+// Event listener for input changes
+driverSearchInput.addEventListener('input', () => showSuggestions(driverSearchInput.value));
+// Event delegation for li elements
+suggestionList.addEventListener('click', event => selectSuggestion(event, suggestionList, driverSearchInput));
+// Event listener to close suggestion list when clicking outside
+document.addEventListener('click', () => suggestionList.innerHTML = '');
 
 /**
  * Filter and sort the drivers array in function of form values
@@ -30,7 +49,7 @@ function filterAndSortDriver(drivers) {
     const nationality = form_search.querySelector("[name=search-nationality]").value;
     const sort_value= form_search.querySelector("[name=sort]").value;
     const sort_order= getRadioInputValue(form_search.querySelectorAll("[name=order]"));
-    let expected_drivers= name == "" ? drivers.filter(d => compare(d.titles,nb_titles,nb_titles_op) && compare(d.wins,nb_wins,nb_wins_op) && compare(d.grandprix,nb_races, nb_races_op) && (nationality === "All" || d.nationality === nationality)) : drivers.filter(d => d.surname === name && compare(d.titles,nb_titles,nb_titles_op) && compare(d.wins,nb_wins,nb_wins_op) && compare(d.grandprix,nb_races, nb_races_op)&& (nationality === "All" || d.nationality === nationality));
+    let expected_drivers= name == "" ? drivers.filter(d => compare(d.titles,nb_titles,nb_titles_op) && compare(d.wins,nb_wins,nb_wins_op) && compare(d.grandprix,nb_races, nb_races_op) && (nationality === "All" || d.nationality === nationality)) : drivers.filter(d => (d.surname.toLowerCase()).includes(name.toLowerCase()) && compare(d.titles,nb_titles,nb_titles_op) && compare(d.wins,nb_wins,nb_wins_op) && compare(d.grandprix,nb_races, nb_races_op)&& (nationality === "All" || d.nationality === nationality));
     expected_drivers = expected_drivers.sort((d1,d2) => sort(d1[sort_value], d2[sort_value], sort_value, sort_order));
     return expected_drivers;
 }
@@ -116,7 +135,7 @@ function getDriverAge(dateOfBirth) {
  * @returns 
  */
 async function getDriverImage(driverRef) {
-  const blob = await fetch(`http://localhost:8080/drivers/${driverRef}`).then(resp => resp.blob());
+  const blob = await fetch(API_URL + `/drivers/${driverRef}`).then(resp => resp.blob());
   const imageUrl = URL.createObjectURL(blob);
   return imageUrl;
 }

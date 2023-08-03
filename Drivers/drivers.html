@@ -19,14 +19,17 @@
         <li><a href="/">Home</a></li>
         <li><a href="">Drivers</a></li>
         <li><a href="#">Teams</a></li>
-        <li><a href="/Circuits\circuits.html">Circuits</a></li>
+        <li><a href="/Races/races.html">Races</a></li>
         <li><a href="/Standings/standings.html">Standings</a></li>
         <li><a href="#">News</a></li>
       </ul>
     </nav>
     <div class="content">
       <form class="search">
-        <input type="text" name="search-name" class="searchBar" placeholder="Search..">
+        <div>
+          <input type="text" name="search-name" class="searchBar" placeholder="Driver.." autocomplete="off">
+          <ul id="suggestionsList"></ul>
+        </div>
         <label for="search-titles">N° titles</label>
         <select name="search-titles-op" class="search-op">
           <option value=">=">>=</option>
